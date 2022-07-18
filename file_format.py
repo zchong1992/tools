@@ -12,17 +12,19 @@ def getEncode(filename):
         return f_charInfo['encoding']
 
 def convert(filename,out_enc="UTF-8"):
-    print("deal file {0}".format(filename))
+    #print("deal file {0}".format(filename))
     encode=getEncode(filename)
     try:
         with open(filename, 'rb') as f:
             content = f.read()
-            print(filename+" is "+encode)
+            #print(filename+" is "+encode)
             if encode=="utf-8" or encode=="ascii":
-                print("pass")
+                #print("pass")
                 return 
-            str=content.decode(encoding=encode)
-            codecs.open(filename+"bak.java",'w').write(str)
+            print(filename +" maybe "+encode)
+            if encode=="GB2312":
+                str=content.decode(encoding=encode)
+                codecs.open(filename,'w').write(str)
         return 
     except IOError as err:
         print("I/O error:{0}".format(err))
@@ -32,7 +34,7 @@ def explore(dir):
     for root,dirs,files in os.walk(dir):
         for file in files:
             if os.path.splitext(file)[1]=='.java':
-                print (file)
+                #print (file)
                 path=os.path.join(root,file)
                 convert(path)
 
