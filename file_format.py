@@ -24,6 +24,7 @@ def convert(filename,out_enc="UTF-8"):
             print(filename +" maybe "+encode)
             if encode=="GB2312":
                 str=content.decode(encoding=encode)
+                os.rename(filename,filename+"bak.java")
                 codecs.open(filename,'w').write(str)
         return 
     except IOError as err:
